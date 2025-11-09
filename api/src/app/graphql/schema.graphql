@@ -1,0 +1,43 @@
+enum Activity {
+  SKIING
+  SURFING
+  OUTDOOR_SIGHTSEEING
+  INDOOR_SIGHTSEEING
+}
+
+type ActivityForecastResult {
+  location: Location!
+  generatedAt: String!
+  activities: [ActivityScore!]!
+}
+
+type ActivityScore {
+  activity: Activity!
+  score: Float!
+  summary: String!
+  bestDay: DailyActivityInsight!
+  daily: [DailyActivityScore!]!
+}
+
+type DailyActivityScore {
+  date: String!
+  score: Float!
+  reasons: [String!]!
+}
+
+type DailyActivityInsight {
+  date: String!
+  description: String!
+}
+
+type Location {
+  name: String!
+  country: String
+  latitude: Float!
+  longitude: Float!
+  timezone: String!
+}
+
+type Query {
+  activityForecast(location: String!): ActivityForecastResult!
+}
